@@ -3,128 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CNP Guide's Avian Field Book — Chitwan National Park</title>
-    <meta name="description" content="A field guide and personal sighting tracker for guides of Chitwan National Park, Nepal.">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <title>CNP Field Guide — Birds of Chitwan</title>
+    <meta name="description" content="A field guide to the birds of Chitwan National Park for wildlife guides.">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="texture-overlay"></div>
-
-    <div class="birds-bg">
-        <svg class="bird-silhouette b1" viewBox="0 0 100 50" xmlns="http://www.w3.org/2000/svg"><path d="M0 25 Q25 5 50 25 Q75 45 100 25" fill="none" stroke="currentColor" stroke-width="2"/><path d="M50 25 Q55 15 65 20" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
-        <svg class="bird-silhouette b2" viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg"><path d="M0 20 Q20 4 40 20 Q60 36 80 20" fill="none" stroke="currentColor" stroke-width="2"/></svg>
-        <svg class="bird-silhouette b3" viewBox="0 0 120 60" xmlns="http://www.w3.org/2000/svg"><path d="M0 30 Q30 6 60 30 Q90 54 120 30" fill="none" stroke="currentColor" stroke-width="2.5"/><path d="M60 30 Q70 18 85 24" fill="none" stroke="currentColor" stroke-width="2"/></svg>
-        <svg class="bird-silhouette b4" viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg"><path d="M0 20 Q20 4 40 20 Q60 36 80 20" fill="none" stroke="currentColor" stroke-width="2"/></svg>
-        <svg class="bird-silhouette b5" viewBox="0 0 100 50" xmlns="http://www.w3.org/2000/svg"><path d="M0 25 Q25 5 50 25 Q75 45 100 25" fill="none" stroke="currentColor" stroke-width="2"/></svg>
-    </div>
-
-    <!-- Navbar -->
-    <nav class="navbar">
-        <a class="logo" href="#">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 3C8 3 4 6 3 10C2 14 4 17 7 19L9 17C7 16 5 14 6 11C7 8 9 6 12 6C15 6 18 8 18 11V14L15 12L14 15L18 17L22 15V11C22 7 17 3 12 3Z" fill="#4ade80"/>
-                <path d="M7 19C8 20 10 21 12 21C14 21 16 20 17 19" stroke="#4ade80" stroke-width="1.5" stroke-linecap="round"/>
-            </svg>
-            CNP<span>FieldBook</span>
-        </a>
-        <div class="nav-center">
-            <div class="search-wrapper">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                <input type="text" id="searchInput" placeholder="Search by name, family…" autocomplete="off">
-                <span class="search-count" id="search-count"></span>
-            </div>
-        </div>
-        <div class="nav-right">
-            <button class="seen-filter-btn" id="seen-filter-btn" title="Show only seen birds">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
-                Seen only
-            </button>
-            <button class="reset-btn" id="reset-btn" title="Clear all sightings">Reset</button>
-        </div>
-    </nav>
-
-    <!-- Sighting Dashboard -->
-    <div class="dashboard" id="dashboard">
-        <div class="dashboard-inner">
-            <div class="dash-main">
-                <div class="dash-counts">
-                    <div class="dash-big">
-                        <span id="seen-count">0</span>
-                        <span class="dash-sep">/</span>
-                        <span id="dash-total">0</span>
-                    </div>
-                    <div class="dash-label">Birds Spotted</div>
-                </div>
-                <div class="dash-progress-wrap">
-                    <div class="dash-progress-bar">
-                        <div class="dash-progress-fill" id="dash-progress-fill"></div>
-                    </div>
-                    <div class="dash-pct" id="dash-pct">0%</div>
+    <!-- Top bar -->
+    <header class="topbar">
+        <div class="topbar-inner">
+            <div class="brand">
+                <span class="brand-icon">🦜</span>
+                <div>
+                    <div class="brand-title">CNP Field Guide</div>
+                    <div class="brand-sub">Birds of Chitwan National Park</div>
                 </div>
             </div>
-            <div class="dash-badges" id="dash-badges">
-                <!-- milestone badges injected by JS -->
+            <div class="search-box">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <input id="searchInput" type="text" placeholder="Search birds…" autocomplete="off">
             </div>
-            <div class="dash-message" id="dash-message">Tap any bird to mark it as spotted!</div>
-        </div>
-    </div>
-
-    <!-- Hero -->
-    <header class="hero">
-        <div class="hero-leaves">
-            <div class="leaf l1"></div>
-            <div class="leaf l2"></div>
-            <div class="leaf l3"></div>
-        </div>
-        <div class="hero-text">
-            <div class="hero-badge">🌿 Guide's Field Book · Chitwan National Park</div>
-            <h1>Avian Field Guide</h1>
-            <p>For the wildlife guides of CNP — track every species you've spotted in the wild.</p>
-            <div class="hero-stats">
-                <div class="stat"><span id="total-count">0</span><label>In Database</label></div>
-                <div class="stat-divider"></div>
-                <div class="stat"><span>500+</span><label>Park Total</label></div>
-                <div class="stat-divider"></div>
-                <div class="stat"><span id="hero-seen">0</span><label>You've Seen</label></div>
-            </div>
-        </div>
-        <div class="hero-scroll-hint">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            <div class="species-count"><span id="count-display">0</span> species</div>
         </div>
     </header>
 
-    <!-- Family filter pills -->
-    <div class="pills-bar">
-        <div class="filter-pills" id="filter-pills">
+    <!-- Family filter -->
+    <div class="pill-bar">
+        <div class="pills" id="pills">
             <button class="pill active" data-family="All">All</button>
         </div>
     </div>
 
-    <!-- Main -->
-    <main class="main-container">
-        <div class="results-meta">
-            <span id="results-label">All Species</span>
-        </div>
-        <div class="bird-grid" id="bird-grid"></div>
-        <div class="empty-state hidden" id="empty-state">
-            <div class="empty-icon">🦅</div>
-            <p>No birds matched your search.<br>Try a different name or family.</p>
-        </div>
+    <!-- List -->
+    <main class="book" id="book">
+        <!-- Injected by JS -->
     </main>
 
-    <footer>
-        <div class="footer-brand">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 3C8 3 4 6 3 10C2 14 4 17 7 19L9 17C7 16 5 14 6 11C7 8 9 6 12 6C15 6 18 8 18 11V14L15 12L14 15L18 17L22 15V11C22 7 17 3 12 3Z" fill="#4ade80"/></svg>
-            CNP FieldBook
-        </div>
-        <p>Dedicated to the wildlife guides of Chitwan National Park 🐦<br>
-        Data: Birds of Nepal Official Checklist (2025) · UNESCO World Heritage Site</p>
+    <footer class="foot">
+        Birds of Chitwan National Park · Nepal · UNESCO World Heritage Site
     </footer>
-
-    <!-- Toast notification -->
-    <div class="toast" id="toast"></div>
 
     <script src="birds_data.js"></script>
     <script src="script.js"></script>
