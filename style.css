@@ -336,6 +336,148 @@ body {
 .empty svg { opacity: 0.35; margin-bottom: 0.75rem; }
 .empty p { font-size: 1rem; }
 
+/* ── MODAL ─────────────────────────────────────────────── */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    background: rgba(0,0,0,0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s, visibility 0.2s;
+}
+.modal-overlay.open {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal {
+    background: #fff;
+    border-radius: 14px;
+    max-width: 480px;
+    width: 100%;
+    max-height: 85vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    transform: translateY(24px) scale(0.95);
+    transition: transform 0.25s ease-out;
+    position: relative;
+}
+.modal-overlay.open .modal {
+    transform: translateY(0) scale(1);
+}
+
+.modal-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 1;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.45);
+    border: none;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+.modal-close:hover { background: rgba(0,0,0,0.65); }
+.modal-close:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+
+.modal-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-img-wrap {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    border-radius: 14px 14px 0 0;
+    background: var(--paper-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: opacity 0.3s;
+}
+.modal-img[src] { opacity: 1; }
+.modal-img:not([src]) { opacity: 0; }
+
+.modal-info {
+    padding: 1.25rem 1.5rem 1.5rem;
+}
+
+.modal-names {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.5rem 0.8rem;
+    margin-bottom: 0.5rem;
+}
+
+.modal-english {
+    font-family: 'Lora', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.3;
+}
+
+.modal-scientific {
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-size: 0.9rem;
+    color: var(--ink-light);
+}
+
+.modal-nepali {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--gold);
+    background: var(--gold-light);
+    padding: 0.15rem 0.6rem;
+    border-radius: 4px;
+    white-space: nowrap;
+}
+
+.modal-family {
+    font-size: 0.8rem;
+    color: var(--green);
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    letter-spacing: 0.3px;
+}
+
+.modal-detail {
+    font-size: 0.95rem;
+    color: var(--ink-mid);
+    line-height: 1.65;
+}
+
+@media (max-width: 540px) {
+    .modal { max-width: 100%; max-height: 90vh; margin: 0.5rem; }
+    .modal-info { padding: 1rem 1.25rem 1.25rem; }
+    .modal-english { font-size: 1.15rem; }
+}
+
+@media print {
+    .modal-overlay { display: none; }
+}
+
 /* ── WHATSAPP BUTTON ──────────────────────────────────── */
 .whatsapp-btn {
     position: fixed;

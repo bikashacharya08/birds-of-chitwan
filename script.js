@@ -138,6 +138,57 @@ document.addEventListener('DOMContentLoaded', () => {
         searchInput.focus();
     });
 
+    // ── Modal ────────────────────────────────────────
+    const modalOverlay = document.getElementById('modalOverlay');
+    const modalImg = document.getElementById('modalImg');
+    const modalEnglish = document.getElementById('modalEnglish');
+    const modalScientific = document.getElementById('modalScientific');
+    const modalNepali = document.getElementById('modalNepali');
+    const modalFamily = document.getElementById('modalFamily');
+    const modalDetail = document.getElementById('modalDetail');
+    const modalClose = document.getElementById('modalClose');
+
+    function openModal(bird) {
+        modalImg.onload = null;
+        modalImg.onerror = null;
+        modalImg.style.opacity = '';
+        const cachedUrl = imgCache.get(bird.scientific);
+        if (cachedUrl) {
+            const largeUrl = cachedUrl.replace(/\/(\d+)px-/, '/600px-');
+            modalImg.onerror = () => { modalImg.src = cachedUrl; };
+            modalImg.src = largeUrl;
+        } else {
+            modalImg.removeAttribute('src');
+        }
+        modalEnglish.textContent = bird.english;
+        modalScientific.textContent = bird.scientific;
+        modalNepali.textContent = bird.nepali;
+        modalFamily.textContent = bird.family || '';
+        modalDetail.textContent = bird.details || '';
+        modalOverlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+        modalOverlay.classList.remove('open');
+        document.body.style.overflow = '';
+    }
+
+    book.addEventListener('click', e => {
+        const entry = e.target.closest('.bird-entry');
+        if (!entry) return;
+        const bird = allBirds.find(b => b.scientific === entry.dataset.sci);
+        if (bird) openModal(bird);
+    });
+
+    modalClose.addEventListener('click', closeModal);
+    modalOverlay.addEventListener('click', e => {
+        if (e.target === modalOverlay) closeModal();
+    });
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Escape' && modalOverlay.classList.contains('open')) closeModal();
+    });
+
     // ── Filter ───────────────────────────────────────
     function getFiltered() {
         return allBirds.filter(bird => {
@@ -225,6 +276,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     <span class="bird-nepali">${bird.nepali}</span>
                 </div>
                 <div class="bird-detail">${bird.details || ''}</div>`;
+
+        entry.dataset.sci = bird.scientific;
 
         entry.appendChild(num);
         entry.appendChild(thumb);
