@@ -281,7 +281,7 @@ const allBirds = [
     { english: "Alexandrine Parakeet", scientific: "Psittacula eupatria", nepali: "काण्ठे सुगा", family: "Parrots", details: "Named after Alexander the Great; a large parakeet with distinctive red shoulder patches." },
     { english: "Rose-ringed Parakeet", scientific: "Psittacula krameri", nepali: "तीता सुगा", family: "Parrots", details: "A highly adaptable, bright green parrot with a distinctive pink-and-black neck ring." },
     { english: "Plum-headed Parakeet", scientific: "Psittacula cyanocephala", nepali: "टुइ सुगा", family: "Parrots", details: "Males have a beautiful plum-red head; one of India's most beautiful parakeets." },
-    { english: "Red-breasted Parakeet", scientific: "Psittacula fasciata", nepali: "रातोछाती सुगा", family: "Parrots", details: "A large parakeet of tall forests with a distinctive banded breast." },
+    { english: "Red-breasted Parakeet", scientific: "Psittacula alexandri", nepali: "रातोछाती सुगा", family: "Parrots", details: "A large parakeet of tall forests with a distinctive banded breast." },
 
     // Pittas
     { english: "Indian Pitta", scientific: "Pitta brachyura", nepali: "पित्त", family: "Pittas", details: "Called 'Navrang' (nine colors) for its stunning multicolored plumage." },
@@ -367,7 +367,7 @@ const allBirds = [
     { english: "Dusky Warbler", scientific: "Phylloscopus fuscatus", nepali: "खैरो फिस्टो", family: "Warblers", details: "A secretive, dark-brown leaf warbler that creeps through dense undergrowth." },
     { english: "Greenish Warbler", scientific: "Phylloscopus trochiloides", nepali: "हरियो फिस्टो", family: "Warblers", details: "A small, active warbler flitting high in the canopy; a common passage migrant." },
     { english: "Grey-hooded Warbler", scientific: "Phylloscopus xanthoschistos", nepali: "खैरोटाउके फिस्टो", family: "Warblers", details: "A sprightly warbler with a bright yellow supercilium and grey hood." },
-    { english: "Thick-billed Warbler", scientific: "Arundinacea aedon", nepali: "मोटोठुँडे फिस्टो", family: "Warblers", details: "A large, skulking warbler with a relatively heavy bill." },
+    { english: "Thick-billed Warbler", scientific: "Arundinax aedon", nepali: "मोटोठुँडे फिस्टो", family: "Warblers", details: "A large, skulking warbler with a relatively heavy bill." },
 
     // Babblers
     { english: "Yellow-eyed Babbler", scientific: "Chrysomma sinense", nepali: "पहेँलो-आँखा भ्याकुर", family: "Babblers", details: "Has striking bright yellow eyes and is found in tall grass and scrub." },
