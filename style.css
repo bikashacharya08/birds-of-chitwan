@@ -109,18 +109,6 @@ body {
 .search-clear.visible { display: inline-flex; }
 .search-clear:focus-visible { outline: 2px solid rgba(255,255,255,0.7); outline-offset: 2px; }
 
-.species-count {
-    font-size: 0.8rem;
-    color: rgba(255,255,255,0.7);
-    white-space: nowrap;
-    flex-shrink: 0;
-}
-.species-count span {
-    font-weight: 700;
-    color: #fff;
-    font-size: 1rem;
-}
-
 /* ── PILL BAR ─────────────────────────────────────────── */
 .pill-bar {
     position: sticky;
@@ -176,11 +164,38 @@ body {
     outline-color: #fff;
 }
 
+/* ── HERO COUNT ────────────────────────────────────────── */
+.hero-count {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 0.5rem;
+    text-align: center;
+}
+
+.hero-number {
+    display: block;
+    font-family: 'Lora', serif;
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: var(--green);
+    line-height: 1;
+    letter-spacing: -1px;
+}
+
+.hero-label {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--ink-light);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-top: 0.3rem;
+}
+
 /* ── BOOK ─────────────────────────────────────────────── */
 .book {
     max-width: 860px;
     margin: 0 auto;
-    padding: 1.5rem 1.5rem 4rem;
+    padding: 0.75rem 1.5rem 4rem;
 }
 
 /* ── FAMILY SECTION ───────────────────────────────────── */
@@ -578,7 +593,6 @@ body {
     .brand-title { font-size: 0.95rem; }
     .brand-sub { display: none; }
     .search-box { order: 3; width: 100%; }
-    .species-count { margin-left: auto; }
 
     .pills { padding: 0.55rem 1rem; }
 
@@ -597,6 +611,8 @@ body {
     .bird-scientific { font-size: 0.8rem; }
     .bird-detail { font-size: 0.8rem; }
     .bird-nepali { font-size: 0.75rem; }
+    .hero-number { font-size: 2.5rem; }
+    .hero-count { padding: 1.5rem 1rem 0.25rem; }
 }
 
 @media (max-width: 380px) {
@@ -609,7 +625,7 @@ body {
 
 /* ── PRINT ────────────────────────────────────────────── */
 @media print {
-    .topbar, .pill-bar, .foot { display: none; }
+    .topbar, .pill-bar, .hero-count, .foot { display: none; }
     .book { max-width: 100%; padding: 0.5in; }
     .bird-entry {
         break-inside: avoid;
