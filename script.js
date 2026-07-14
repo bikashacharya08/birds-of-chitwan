@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let activeFamily = 'All';
     let activeQuery = '';
+    const imgCache = new Map();
 
     // Build family pills
     families.forEach(f => {
@@ -100,18 +101,55 @@ document.addEventListener('DOMContentLoaded', () => {
     function makeEntry(bird, idx) {
         const entry = document.createElement('div');
         entry.className = 'bird-entry';
-        entry.innerHTML = `
-            <div class="bird-num">${idx}</div>
-            <div class="bird-content">
+
+        const num = document.createElement('div');
+        num.className = 'bird-num';
+        num.textContent = idx;
+
+        const thumb = document.createElement('div');
+        thumb.className = 'bird-thumb';
+        const img = document.createElement('img');
+        img.className = 'bird-thumb-img';
+        img.alt = bird.english;
+        img.loading = 'lazy';
+        img.onerror = () => { img.style.display = 'none'; };
+        thumb.appendChild(img);
+
+        const content = document.createElement('div');
+        content.className = 'bird-content';
+        content.innerHTML = `
                 <div class="bird-names">
                     <span class="bird-english">${bird.english}</span>
                     <span class="bird-scientific">${bird.scientific}</span>
                     <span class="bird-nepali">${bird.nepali}</span>
                 </div>
-                <div class="bird-detail">${bird.details || ''}</div>
-            </div>
-        `;
+                <div class="bird-detail">${bird.details || ''}</div>`;
+
+        entry.appendChild(num);
+        entry.appendChild(thumb);
+        entry.appendChild(content);
+
+        loadBirdImage(bird.scientific, img);
         return entry;
+    }
+
+    function loadBirdImage(scientific, imgEl) {
+        if (imgCache.has(scientific)) {
+            const url = imgCache.get(scientific);
+            if (url) imgEl.src = url;
+            return;
+        }
+
+        imgCache.set(scientific, null);
+
+        fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(scientific)}`)
+            .then(r => r.ok ? r.json() : Promise.reject())
+            .then(data => {
+                const url = data.thumbnail ? data.thumbnail.source : null;
+                imgCache.set(scientific, url);
+                if (url && imgEl.isConnected) imgEl.src = url;
+            })
+            .catch(() => {});
     }
 
     render();

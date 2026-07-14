@@ -190,9 +190,9 @@ body {
 /* ── BIRD ENTRY ───────────────────────────────────────── */
 .bird-entry {
     display: grid;
-    grid-template-columns: 2rem 1fr;
-    gap: 0 0.8rem;
-    padding: 0.85rem 0.5rem;
+    grid-template-columns: 2rem 56px 1fr;
+    gap: 0 0.6rem;
+    padding: 0.65rem 0.5rem;
     border-bottom: 1px solid var(--rule);
     transition: background 0.15s;
     border-radius: 4px;
@@ -209,6 +209,34 @@ body {
     padding-top: 0.25rem;
     text-align: right;
     user-select: none;
+}
+
+.bird-thumb {
+    width: 56px;
+    height: 56px;
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--paper-dark);
+    border: 1px solid var(--rule);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bird-thumb-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: opacity 0.3s;
+}
+
+.bird-thumb-img:not([src]) {
+    opacity: 0;
+}
+
+.bird-thumb-img[src] {
+    opacity: 1;
 }
 
 .bird-content {}
