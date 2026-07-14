@@ -3,45 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CNP Field Guide — Birds of Chitwan</title>
-    <meta name="description" content="A field guide to the birds of Chitwan National Park for wildlife guides.">
+    <title>Bird Book of Chitwan — A Field Guide</title>
+    <meta name="description" content="A field guide to the birds of Chitwan National Park — 200+ species with photos, names in English, Scientific & Nepali.">
+    <meta name="theme-color" content="#2d6a4f">
+
+    <meta property="og:title" content="Bird Book of Chitwan">
+    <meta property="og:description" content="A field guide to the birds of Chitwan National Park — 200+ species with photos, names in English, Scientific & Nepali.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://birds-of-chitwan.vercel.app">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="images/icon.svg">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+    <link rel="preconnect" href="https://en.wikipedia.org">
+    <link rel="preconnect" href="https://upload.wikimedia.org">
     <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Top bar -->
     <header class="topbar">
         <div class="topbar-inner">
             <div class="brand">
                 <span class="brand-icon">🦜</span>
                 <div>
-                    <div class="brand-title">CNP Field Guide</div>
+                    <div class="brand-title">Bird Book of Chitwan</div>
                     <div class="brand-sub">Birds of Chitwan National Park</div>
                 </div>
             </div>
             <div class="search-box">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
                 <input id="searchInput" type="text" placeholder="Search birds…" autocomplete="off">
+                <button class="search-clear" id="searchClear" aria-label="Clear search">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
             </div>
             <div class="species-count"><span id="count-display">0</span> species</div>
         </div>
     </header>
 
-    <!-- Family filter -->
     <div class="pill-bar">
         <div class="pills" id="pills">
             <button class="pill active" data-family="All">All</button>
         </div>
     </div>
 
-    <!-- List -->
-    <main class="book" id="book">
-        <!-- Injected by JS -->
-    </main>
+    <main class="book" id="book"></main>
 
     <footer class="foot">
-        Birds of Chitwan National Park · Nepal · UNESCO World Heritage Site
+        Bird Book of Chitwan · Nepal · UNESCO World Heritage Site
     </footer>
 
     <script src="birds_data.js"></script>

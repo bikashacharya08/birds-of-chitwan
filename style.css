@@ -10,7 +10,6 @@
     --gold:       #b5832a;
     --gold-light: #f4e3c0;
     --rule:       #d6cfc4;
-    --red:        #9b2226;
 }
 
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -19,7 +18,7 @@ html { scroll-behavior: smooth; }
 
 body {
     font-family: 'Inter', sans-serif;
-    background: var(--paper-dark);
+    background: linear-gradient(180deg, var(--paper-dark) 0%, var(--paper) 100%);
     color: var(--ink);
     min-height: 100vh;
 }
@@ -75,13 +74,14 @@ body {
     border: 1px solid rgba(255,255,255,0.25);
     border-radius: 8px;
     padding: 0.55rem 1rem;
-    transition: background 0.2s;
+    transition: background 0.2s, border-color 0.2s;
 }
 .search-box:focus-within {
     background: rgba(255,255,255,0.25);
     border-color: rgba(255,255,255,0.5);
 }
-.search-box svg { color: rgba(255,255,255,0.7); flex-shrink: 0; }
+.search-box > svg { color: rgba(255,255,255,0.7); flex-shrink: 0; }
+
 .search-box input {
     background: none;
     border: none;
@@ -92,6 +92,22 @@ body {
     width: 100%;
 }
 .search-box input::placeholder { color: rgba(255,255,255,0.55); }
+
+.search-clear {
+    display: none;
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.7);
+    cursor: pointer;
+    padding: 2px;
+    border-radius: 4px;
+    transition: color 0.15s;
+    flex-shrink: 0;
+    line-height: 0;
+}
+.search-clear:hover { color: #fff; }
+.search-clear.visible { display: inline-flex; }
+.search-clear:focus-visible { outline: 2px solid rgba(255,255,255,0.7); outline-offset: 2px; }
 
 .species-count {
     font-size: 0.8rem;
@@ -139,10 +155,16 @@ body {
     white-space: nowrap;
     transition: all 0.2s;
     flex-shrink: 0;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
 }
 .pill:hover {
     border-color: var(--green);
     color: var(--green);
+}
+.pill:focus-visible {
+    outline: 2px solid var(--green);
+    outline-offset: 2px;
 }
 .pill.active {
     background: var(--green);
@@ -150,8 +172,11 @@ body {
     color: #fff;
     font-weight: 600;
 }
+.pill.active:focus-visible {
+    outline-color: #fff;
+}
 
-/* ── BOOK / MAIN ──────────────────────────────────────── */
+/* ── BOOK ─────────────────────────────────────────────── */
 .book {
     max-width: 860px;
     margin: 0 auto;
@@ -192,14 +217,15 @@ body {
     display: grid;
     grid-template-columns: 2rem 56px 1fr;
     gap: 0 0.6rem;
-    padding: 0.65rem 0.5rem;
+    padding: 0.7rem 0.5rem;
     border-bottom: 1px solid var(--rule);
-    transition: background 0.15s;
-    border-radius: 4px;
+    transition: background 0.15s, box-shadow 0.15s;
+    border-radius: 6px;
 }
 
 .bird-entry:hover {
     background: var(--paper);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
 }
 
 .bird-num {
@@ -211,6 +237,7 @@ body {
     user-select: none;
 }
 
+/* ── THUMBNAIL ────────────────────────────────────────── */
 .bird-thumb {
     width: 56px;
     height: 56px;
@@ -221,6 +248,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
 }
 
 .bird-thumb-img {
@@ -231,14 +259,33 @@ body {
     transition: opacity 0.3s;
 }
 
-.bird-thumb-img:not([src]) {
-    opacity: 0;
+.bird-thumb-img:not([src]) { opacity: 0; }
+.bird-thumb-img[src] { opacity: 1; }
+
+/* Shimmer loading */
+.bird-thumb.loading::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(255,255,255,0.35) 50%,
+        transparent 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.2s ease-in-out infinite;
 }
 
-.bird-thumb-img[src] {
-    opacity: 1;
+@keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
 }
 
+/* Failed state – subtle silence */
+.bird-thumb.failed { opacity: 0.35; }
+
+/* ── CONTENT ──────────────────────────────────────────── */
 .bird-content {}
 
 .bird-names {
@@ -286,7 +333,7 @@ body {
     padding: 5rem 2rem;
     color: var(--ink-light);
 }
-.empty-icon { font-size: 3rem; margin-bottom: 0.75rem; }
+.empty svg { opacity: 0.35; margin-bottom: 0.75rem; }
 .empty p { font-size: 1rem; }
 
 /* ── FOOTER ───────────────────────────────────────────── */
@@ -299,12 +346,59 @@ body {
     background: var(--paper);
 }
 
-
-
-/* ── RESPONSIVE ───────────────────────────────────────── */
-@media (max-width: 600px) {
-    .topbar-inner { flex-wrap: wrap; gap: 0.7rem; }
+/* ── MOBILE ───────────────────────────────────────────── */
+@media (max-width: 540px) {
+    .topbar-inner {
+        flex-wrap: wrap;
+        gap: 0.6rem;
+        padding: 0.6rem 1rem;
+    }
+    .brand-title { font-size: 0.95rem; }
     .brand-sub { display: none; }
-    .species-count { order: 3; width: 100%; text-align: right; }
-    .bird-names { flex-direction: column; gap: 0.2rem; }
+    .search-box { order: 3; width: 100%; }
+    .species-count { margin-left: auto; }
+
+    .pills { padding: 0.55rem 1rem; }
+
+    .book { padding: 1rem 1rem 3rem; }
+
+    .bird-entry {
+        grid-template-columns: 1.6rem 48px 1fr;
+        gap: 0 0.5rem;
+        padding: 0.6rem 0.4rem;
+    }
+    .bird-thumb {
+        width: 48px;
+        height: 48px;
+    }
+    .bird-english { font-size: 0.95rem; }
+    .bird-scientific { font-size: 0.8rem; }
+    .bird-detail { font-size: 0.8rem; }
+    .bird-nepali { font-size: 0.75rem; }
+}
+
+@media (max-width: 380px) {
+    .topbar-inner { padding: 0.5rem 0.75rem; gap: 0.4rem; }
+    .brand-title { font-size: 0.85rem; }
+    .brand-icon { font-size: 1.4rem; }
+    .bird-english { font-size: 0.9rem; }
+    .bird-entry { padding: 0.5rem 0.3rem; }
+}
+
+/* ── PRINT ────────────────────────────────────────────── */
+@media print {
+    .topbar, .pill-bar, .foot { display: none; }
+    .book { max-width: 100%; padding: 0.5in; }
+    .bird-entry {
+        break-inside: avoid;
+        page-break-inside: avoid;
+        border-bottom: 1px solid #ccc;
+        grid-template-columns: 40px 1fr;
+    }
+    .bird-num { display: none; }
+    .bird-thumb { width: 40px; height: 40px; border: 1px solid #ccc; }
+    .bird-english { font-size: 11pt; }
+    .bird-scientific { font-size: 9pt; }
+    .bird-detail { font-size: 8pt; color: #444; }
+    .bird-nepali { font-size: 8pt; }
 }

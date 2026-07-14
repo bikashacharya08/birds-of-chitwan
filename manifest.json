@@ -1,0 +1,12 @@
+{
+  "name": "Bird Book of Chitwan",
+  "short_name": "Bird Book",
+  "description": "A field guide to the birds of Chitwan National Park — 200+ species with photos, names in English, Scientific & Nepali.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#faf7f2",
+  "theme_color": "#2d6a4f",
+  "icons": [
+    { "src": "images/icon.svg", "sizes": "any", "type": "image/svg+xml" }
+  ]
+}
