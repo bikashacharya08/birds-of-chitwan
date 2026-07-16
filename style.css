@@ -65,6 +65,37 @@ body {
     letter-spacing: 0.3px;
 }
 
+.apk-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    padding: 0.5rem 0.8rem;
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.2s, border-color 0.2s, transform 0.1s;
+    cursor: pointer;
+    flex-shrink: 0;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+}
+.apk-btn:hover {
+    background: rgba(255, 255, 255, 0.22);
+    border-color: rgba(255, 255, 255, 0.45);
+}
+.apk-btn:focus-visible {
+    outline: 2px solid rgba(255, 255, 255, 0.7);
+    outline-offset: 2px;
+}
+.apk-btn:active {
+    transform: scale(0.97);
+}
+
 .search-box {
     flex: 1;
     display: flex;
@@ -592,6 +623,7 @@ body {
     }
     .brand-title { font-size: 0.95rem; }
     .brand-sub { display: none; }
+    .apk-btn { margin-left: auto; padding: 0.4rem 0.65rem; font-size: 0.78rem; }
     .search-box { order: 3; width: 100%; }
 
     .pills { padding: 0.55rem 1rem; }
